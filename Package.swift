@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 // Copyright 2020 Google LLC
@@ -285,15 +285,6 @@ let package = Package(
         .define("FIRABTesting_VERSION", to: "0.0.1"), // TODO: Fix version
       ]
     ),
-    .testTarget(
-      name: "ABTestingUnit",
-      dependencies: ["FirebaseABTesting", "OCMock"],
-      path: "FirebaseABTesting/Tests/Unit",
-      resources: [.process("Resources")],
-      cSettings: [
-        .headerSearchPath("../../.."),
-      ]
-    ),
     .target(
       name: "FirebaseAuth",
       dependencies: ["FirebaseCore",
@@ -377,19 +368,6 @@ let package = Package(
         .define("FIRDatabase_VERSION", to: "0.0.1"), // TODO: Fix version
       ]
     ),
-    .testTarget(
-      name: "DatabaseUnit",
-      dependencies: ["FirebaseDatabase", "OCMock", "SharedTestUtilities"],
-      path: "FirebaseDatabase/Tests/",
-      exclude: [
-        "Integration/",
-      ],
-      resources: [.process("Resources")],
-      cSettings: [
-        .headerSearchPath("../.."),
-      ]
-    ),
-
     .target(
       name: "FirebaseFunctions",
       dependencies: [
@@ -446,27 +424,6 @@ let package = Package(
       cSettings: [
         .headerSearchPath("../../"),
         .define("FIRRemoteConfig_VERSION", to: "0.0.1"), // TODO: Fix version
-      ]
-    ),
-    .testTarget(
-      name: "RemoteConfigUnit",
-      dependencies: ["FirebaseRemoteConfig", "OCMock"],
-      path: "FirebaseRemoteConfig/Tests/Unit",
-      exclude: [
-        // Need to be evaluated/ported to RC V2.
-        "RCNConfigAnalyticsTest.m",
-        "RCNConfigSettingsTest.m",
-        "RCNConfigTest.m",
-        "RCNRemoteConfig+FIRAppTest.m",
-        "RCNThrottlingTests.m",
-      ],
-      resources: [
-        .process("SecondApp-GoogleService-Info.plist"),
-        .process("Defaults-testInfo.plist"),
-        .process("TestABTPayload.txt"),
-      ],
-      cSettings: [
-        .headerSearchPath("../../.."),
       ]
     ),
     .target(
